@@ -1,0 +1,96 @@
+{% extends "base.html" %}
+
+{% block title %}Home - Student Record Management System{% endblock %}
+
+{% block content %}
+<!-- Welcome / Hero Section -->
+<div class="row align-items-center mb-5 g-4">
+    <div class="col-lg-7">
+        <div class="pe-lg-4">
+            <h1 class="display-4 fw-bold text-primary mb-3">Student Record Management System</h1>
+            <p class="lead text-muted">
+                Welcome to the Student Record Management System! This is a modern, responsive web application designed to help administrative staff easily manage student academic records.
+            </p>
+            <p class="text-secondary">
+                The application demonstrates standard web development fundamentals, such as Flask routing, SQLAlchemy ORM databases, GET/POST request handling, HTML5 input forms, and dynamic Jinja2 templating.
+            </p>
+            <div class="d-flex flex-wrap gap-3 mt-4">
+                <a href="{{ url_for('students_list') }}" class="btn btn-primary btn-lg shadow-sm px-4">
+                    <i class="bi bi-people-fill me-2"></i>View Student List
+                </a>
+                <a href="{{ url_for('add_student') }}" class="btn btn-outline-primary btn-lg px-4">
+                    <i class="bi bi-person-plus-fill me-2"></i>Add New Student
+                </a>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Quick Statistics / Dashboard Summary Card -->
+    <div class="col-lg-5">
+        <div class="card border-0 shadow-lg rounded-4 overflow-hidden">
+            <!-- Header gradient -->
+            <div class="bg-primary bg-gradient text-white p-4 text-center">
+                <i class="bi bi-speedometer2 display-2 mb-2"></i>
+                <h3 class="fw-bold mb-0">Quick Dashboard</h3>
+            </div>
+            <!-- Statistics content -->
+            <div class="card-body p-4 text-center bg-white">
+                <h6 class="text-muted uppercase fw-semibold mb-3">Total Registered Students</h6>
+                <div class="display-3 fw-bold text-primary mb-3">{{ total_students }}</div>
+                <p class="text-muted small">All records are safely stored in local SQLite database.</p>
+                <hr class="my-4">
+                <!-- Helper navigation buttons -->
+                <div class="row g-2">
+                    <div class="col-6">
+                        <a href="{{ url_for('about') }}" class="btn btn-light w-100 py-2 border-0">
+                            <i class="bi bi-info-circle text-primary me-2"></i>About Project
+                        </a>
+                    </div>
+                    <div class="col-6">
+                        <a href="{{ url_for('contact') }}" class="btn btn-light w-100 py-2 border-0">
+                            <i class="bi bi-telephone text-primary me-2"></i>Contact Us
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Features Section -->
+<div class="row g-4 mt-2">
+    <div class="col-md-4">
+        <div class="card h-100 border-0 shadow-sm p-3 text-center rounded-3 bg-light-blue-hover transition">
+            <div class="card-body">
+                <div class="feature-icon bg-primary text-white rounded-circle d-inline-flex align-items-center justify-content-center mb-3" style="width: 60px; height: 60px;">
+                    <i class="bi bi-plus-circle-fill fs-3"></i>
+                </div>
+                <h5 class="fw-bold card-title">Add & Create</h5>
+                <p class="card-text text-muted">Register new student records into the database with active front-end form validation.</p>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-4">
+        <div class="card h-100 border-0 shadow-sm p-3 text-center rounded-3 bg-light-blue-hover transition">
+            <div class="card-body">
+                <div class="feature-icon bg-primary text-white rounded-circle d-inline-flex align-items-center justify-content-center mb-3" style="width: 60px; height: 60px;">
+                    <i class="bi bi-search fs-3"></i>
+                </div>
+                <h5 class="fw-bold card-title">Search & Sort</h5>
+                <p class="card-text text-muted">Instantly find student profiles by Name, Department, or Roll Number. Sort them instantly.</p>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-4">
+        <div class="card h-100 border-0 shadow-sm p-3 text-center rounded-3 bg-light-blue-hover transition">
+            <div class="card-body">
+                <div class="feature-icon bg-primary text-white rounded-circle d-inline-flex align-items-center justify-content-center mb-3" style="width: 60px; height: 60px;">
+                    <i class="bi bi-pencil-square fs-3"></i>
+                </div>
+                <h5 class="fw-bold card-title">Edit & Delete</h5>
+                <p class="card-text text-muted">Easily modify existing student information or safely remove old records with confirmation check.</p>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,110 @@
+{% extends "base.html" %}
+
+{% block title %}About Project - Student Record Management System{% endblock %}
+
+{% block content %}
+<div class="row justify-content-center">
+    <div class="col-lg-10 col-12">
+        <!-- Section: Title -->
+        <div class="text-center mb-5">
+            <h2 class="fw-bold text-primary display-6 mb-2">About The Project</h2>
+            <p class="text-muted lead">College Submission and Viva Presentation Project</p>
+            <div class="mx-auto bg-primary rounded" style="width: 80px; height: 4px;"></div>
+        </div>
+
+        <!-- 1. Objective of the Project -->
+        <div class="card border-0 shadow-sm mb-4 rounded-3">
+            <div class="card-body p-4">
+                <h4 class="fw-bold text-primary mb-3">
+                    <i class="bi bi-bullseye me-2"></i>Project Objective
+                </h4>
+                <p class="text-secondary leading-relaxed">
+                    The primary objective of this project is to develop a fully functional, lightweight **Student Record Management System** to demonstrate fundamental backend web development and database operations. 
+                    It serves as a practical implementation of core CRUD (Create, Read, Update, Delete) concepts inside a clean web architecture, highlighting routing parameters, database persistence, layout templates, and HTML form handling.
+                </p>
+            </div>
+        </div>
+
+        <!-- 2. Tech Stack & Features Row -->
+        <div class="row g-4 mb-4">
+            <!-- Technologies Used -->
+            <div class="col-md-6 col-12">
+                <div class="card border-0 shadow-sm h-100 rounded-3">
+                    <div class="card-body p-4">
+                        <h4 class="fw-bold text-primary mb-3">
+                            <i class="bi bi-cpu-fill me-2"></i>Technologies Used
+                        </h4>
+                        <ul class="list-group list-group-flush text-secondary">
+                            <li class="list-group-item bg-transparent px-0 border-light">
+                                <strong>Python 3:</strong> The primary language for application logic.
+                            </li>
+                            <li class="list-group-item bg-transparent px-0 border-light">
+                                <strong>Flask:</strong> A lightweight WSGI web application micro-framework.
+                            </li>
+                            <li class="list-group-item bg-transparent px-0 border-light">
+                                <strong>Flask-SQLAlchemy:</strong> An extension that adds SQLAlchemy support for interacting with SQLite databases using Object Relational Mapping (ORM).
+                            </li>
+                            <li class="list-group-item bg-transparent px-0 border-light">
+                                <strong>SQLite:</strong> A self-contained, serverless SQL database engine.
+                            </li>
+                            <li class="list-group-item bg-transparent px-0 border-light">
+                                <strong>Bootstrap 5 & CSS:</strong> Used to design responsive, mobile-friendly interfaces.
+                            </li>
+                            <li class="list-group-item bg-transparent px-0 border-light">
+                                <strong>Jinja2:</strong> A template engine for rendering dynamic HTML content on the server.
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Features Built -->
+            <div class="col-md-6 col-12">
+                <div class="card border-0 shadow-sm h-100 rounded-3">
+                    <div class="card-body p-4">
+                        <h4 class="fw-bold text-primary mb-3">
+                            <i class="bi bi-gear-fill me-2"></i>Features
+                        </h4>
+                        <ul class="list-group list-group-flush text-secondary">
+                            <li class="list-group-item bg-transparent px-0 border-light">
+                                <i class="bi bi-check-circle-fill text-success me-2"></i> Complete Database CRUD operations.
+                            </li>
+                            <li class="list-group-item bg-transparent px-0 border-light">
+                                <i class="bi bi-check-circle-fill text-success me-2"></i> Full Search filters (Name, Department, Roll No).
+                            </li>
+                            <li class="list-group-item bg-transparent px-0 border-light">
+                                <i class="bi bi-check-circle-fill text-success me-2"></i> Sorting controls by Name or Department.
+                            </li>
+                            <li class="list-group-item bg-transparent px-0 border-light">
+                                <i class="bi bi-check-circle-fill text-success me-2"></i> Dynamic Flask Flash messages for user alerts.
+                            </li>
+                            <li class="list-group-item bg-transparent px-0 border-light">
+                                <i class="bi bi-check-circle-fill text-success me-2"></i> Safe confirmation pages prior to record deletes.
+                            </li>
+                            <li class="list-group-item bg-transparent px-0 border-light">
+                                <i class="bi bi-check-circle-fill text-success me-2"></i> Responsive fluid grid layout (works on desktop/mobile).
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 3. Scope & Future Scope -->
+        <div class="card border-0 shadow-sm rounded-3">
+            <div class="card-body p-4">
+                <h4 class="fw-bold text-primary mb-3">
+                    <i class="bi bi-compass-fill me-2"></i>Scope & Future Enhancements
+                </h4>
+                <p class="text-secondary mb-3 leading-relaxed">
+                    Currently, the scope of this project is to serve as an academic submission demonstrating Flask backend and SQLite crud operations. It allows basic student administrative tracking.
+                </p>
+                <p class="text-secondary mb-0 leading-relaxed">
+                    <strong>Future extensions include:</strong> Implementing student/admin user authentication, exporting database records to CSV/PDF sheets, adding course registration, tracking fee statuses, and adding interactive charts to display GPA trends.
+                </p>
+            </div>
+        </div>
+
+    </div>
+</div>
+{% endblock %}

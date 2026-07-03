@@ -1,0 +1,100 @@
+{% extends "base.html" %}
+
+{% block title %}Student Details - {{ student.name }}{% endblock %}
+
+{% block content %}
+<div class="row justify-content-center">
+    <div class="col-lg-8 col-md-10">
+        <!-- Back Button -->
+        <div class="mb-3">
+            <a href="{{ url_for('students_list') }}" class="text-decoration-none text-primary fw-semibold">
+                <i class="bi bi-arrow-left me-1"></i> Back to Student Directory
+            </a>
+        </div>
+        
+        <!-- Student Details Card -->
+        <div class="card border-0 shadow-sm rounded-3 overflow-hidden">
+            <!-- Header Block -->
+            <div class="bg-primary text-white p-4">
+                <div class="d-flex align-items-center gap-3">
+                    <div class="bg-white text-primary rounded-circle d-flex align-items-center justify-content-center" style="width: 70px; height: 70px;">
+                        <i class="bi bi-person-badge fs-1"></i>
+                    </div>
+                    <div>
+                        <h3 class="fw-bold mb-1">{{ student.name }}</h3>
+                        <p class="mb-0 text-white-50 font-monospace text-uppercase small">Roll No: {{ student.roll_number }}</p>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Details Sheet -->
+            <div class="card-body p-4 bg-white">
+                <div class="row g-4">
+                    
+                    <!-- Section 1: Academic Information -->
+                    <div class="col-md-6 col-12">
+                        <h5 class="fw-bold text-primary border-bottom pb-2 mb-3">
+                            <i class="bi bi-mortarboard-fill me-2"></i>Academic Info
+                        </h5>
+                        <div class="mb-3">
+                            <label class="text-muted small fw-semibold d-block">Department</label>
+                            <span class="fs-6 fw-bold text-dark">{{ student.department }}</span>
+                        </div>
+                        <div class="mb-3">
+                            <label class="text-muted small fw-semibold d-block">Academic Year</label>
+                            <span class="fs-6 fw-semibold text-dark">
+                                {% if student.year == 1 %}1st Year (Freshman)
+                                {% elif student.year == 2 %}2nd Year (Sophomore)
+                                {% elif student.year == 3 %}3rd Year (Junior)
+                                {% elif student.year == 4 %}4th Year (Senior)
+                                {% else %}{{ student.year }}
+                                {% endif %}
+                            </span>
+                        </div>
+                        <div class="mb-3">
+                            <label class="text-muted small fw-semibold d-block">Cumulative GPA (CGPA)</label>
+                            <span class="fs-4 fw-bold {% if student.cgpa >= 8.5 %}text-success{% elif student.cgpa >= 5.0 %}text-primary{% else %}text-danger{% endif %}">
+                                {{ "%.2f"|format(student.cgpa) }} / 10.0
+                            </span>
+                        </div>
+                        <div class="mb-3">
+                            <label class="text-muted small fw-semibold d-block">Registration Date</label>
+                            <span class="fs-6 text-secondary">{{ student.created_at.strftime('%B %d, %Y at %H:%M') }}</span>
+                        </div>
+                    </div>
+
+                    <!-- Section 2: Personal & Contact Information -->
+                    <div class="col-md-6 col-12">
+                        <h5 class="fw-bold text-primary border-bottom pb-2 mb-3">
+                            <i class="bi bi-file-earmark-person-fill me-2"></i>Personal Info
+                        </h5>
+                        <div class="mb-3">
+                            <label class="text-muted small fw-semibold d-block">Email Address</label>
+                            <span class="fs-6 text-dark font-monospace">{{ student.email }}</span>
+                        </div>
+                        <div class="mb-3">
+                            <label class="text-muted small fw-semibold d-block">Phone Number</label>
+                            <span class="fs-6 text-dark">{{ student.phone }}</span>
+                        </div>
+                        <div class="mb-3">
+                            <label class="text-muted small fw-semibold d-block">Residential Address</label>
+                            <span class="fs-6 text-dark">{{ student.address }}</span>
+                        </div>
+                    </div>
+                    
+                </div>
+            </div>
+            
+            <!-- Actions Block -->
+            <div class="card-footer bg-light p-3 d-flex justify-content-end gap-2">
+                <a href="{{ url_for('edit_student', id=student.id) }}" class="btn btn-warning px-4 fw-semibold text-dark shadow-sm">
+                    <i class="bi bi-pencil-fill me-1"></i>Edit Profile
+                </a>
+                <a href="{{ url_for('delete_student', id=student.id) }}" class="btn btn-danger px-4 shadow-sm">
+                    <i class="bi bi-trash-fill me-1"></i>Delete Record
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

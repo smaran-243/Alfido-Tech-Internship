@@ -1,0 +1,164 @@
+{% extends "base.html" %}
+
+{% block title %}Students Directory - Student Record Management System{% endblock %}
+
+{% block content %}
+<div class="row mb-4 align-items-center">
+    <!-- Page Header -->
+    <div class="col-md-6 col-12 mb-3 mb-md-0">
+        <h2 class="fw-bold text-primary mb-0">
+            {% if search_query %}
+                <i class="bi bi-search me-2"></i>Search Results
+            {% else %}
+                <i class="bi bi-people-fill me-2"></i>Student Directory
+            {% endif %}
+        </h2>
+        <p class="text-muted mb-0">
+            {% if search_query %}
+                Found {{ students|length }} matching record(s) for "{{ search_query }}"
+            {% else %}
+                Manage and view academic profiles of registered students.
+            {% endif %}
+        </p>
+    </div>
+    
+    <!-- Add Student Shortcut Button -->
+    <div class="col-md-6 col-12 text-md-end text-start">
+        <a href="{{ url_for('add_student') }}" class="btn btn-success shadow-sm">
+            <i class="bi bi-person-plus-fill me-2"></i>Add Student Record
+        </a>
+    </div>
+</div>
+
+<!-- Search & Sort Controls Card -->
+<div class="card border-0 shadow-sm mb-4">
+    <div class="card-body p-4">
+        <div class="row g-3 align-items-center">
+            
+            <!-- 1. Search Form (GET method to /search) -->
+            <div class="col-lg-6 col-md-12">
+                <form action="{{ url_for('search') }}" method="GET" class="d-flex gap-2">
+                    <div class="input-group">
+                        <span class="input-group-text bg-light border-end-0">
+                            <i class="bi bi-search text-muted"></i>
+                        </span>
+                        <input type="text" name="query" class="form-control bg-light border-start-0" placeholder="Search by Name, Roll No, or Department..." value="{{ search_query or '' }}" required>
+                    </div>
+                    <button type="submit" class="btn btn-primary">Search</button>
+                    {% if search_query %}
+                        <a href="{{ url_for('students_list') }}" class="btn btn-outline-secondary" title="Clear Search">
+                            <i class="bi bi-x-lg"></i>
+                        </a>
+                    {% endif %}
+                </form>
+            </div>
+            
+            <!-- 2. Sort Controls -->
+            <div class="col-lg-6 col-md-12 text-lg-end text-start">
+                <span class="text-muted me-2 small fw-semibold">Sort By:</span>
+                <div class="btn-group shadow-sm" role="group">
+                    <a href="{{ url_for('students_list', sort='name') }}" class="btn btn-outline-primary btn-sm {% if current_sort == 'name' %}active{% endif %}">
+                        <i class="bi bi-sort-alpha-down me-1"></i>Name
+                    </a>
+                    <a href="{{ url_for('students_list', sort='department') }}" class="btn btn-outline-primary btn-sm {% if current_sort == 'department' %}active{% endif %}">
+                        <i class="bi bi-building me-1"></i>Department
+                    </a>
+                    <a href="{{ url_for('students_list') }}" class="btn btn-outline-secondary btn-sm {% if not current_sort %}active{% endif %}">
+                        <i class="bi bi-arrow-counterclockwise me-1"></i>Reset
+                    </a>
+                </div>
+            </div>
+            
+        </div>
+    </div>
+</div>
+
+<!-- Student Records Table Card -->
+<div class="card border-0 shadow-sm overflow-hidden">
+    <div class="table-responsive">
+        <table class="table table-hover table-striped align-middle mb-0">
+            <!-- Table Header -->
+            <thead class="table-primary text-primary-dark">
+                <tr>
+                    <th scope="col" class="py-3 px-4" style="width: 80px;">ID</th>
+                    <th scope="col" class="py-3">Name</th>
+                    <th scope="col" class="py-3">Roll Number</th>
+                    <th scope="col" class="py-3">Department</th>
+                    <th scope="col" class="py-3 text-center" style="width: 100px;">Year</th>
+                    <th scope="col" class="py-3 text-center" style="width: 100px;">CGPA</th>
+                    <th scope="col" class="py-3 text-center" style="width: 240px;">Actions</th>
+                </tr>
+            </thead>
+            <!-- Table Body -->
+            <tbody>
+                {% if students %}
+                    {% for student in students %}
+                        <tr>
+                            <!-- 1. Database auto-incremented ID -->
+                            <td class="px-4 fw-bold text-secondary">{{ student.id }}</td>
+                            
+                            <!-- 2. Student name -->
+                            <td>
+                                <div class="fw-semibold text-dark">{{ student.name }}</div>
+                                <span class="text-muted small">{{ student.email }}</span>
+                            </td>
+                            
+                            <!-- 3. Unique Roll number -->
+                            <td class="font-monospace text-uppercase">{{ student.roll_number }}</td>
+                            
+                            <!-- 4. Department -->
+                            <td>
+                                <span class="badge bg-blue-subtle text-primary border border-primary-subtle rounded-pill px-3 py-2">
+                                    {{ student.department }}
+                                </span>
+                            </td>
+                            
+                            <!-- 5. Year -->
+                            <td class="text-center fw-semibold text-secondary">{{ student.year }}</td>
+                            
+                            <!-- 6. CGPA (formatted or colored based on grade) -->
+                            <td class="text-center">
+                                <span class="fw-bold {% if student.cgpa >= 8.5 %}text-success{% elif student.cgpa >= 5.0 %}text-primary{% else %}text-danger{% endif %}">
+                                    {{ "%.2f"|format(student.cgpa) }}
+                                </span>
+                            </td>
+                            
+                            <!-- 7. Dynamic Actions -->
+                            <td class="text-center">
+                                <div class="d-flex justify-content-center gap-1">
+                                    <!-- View Student Details Link -->
+                                    <a href="{{ url_for('student_details', id=student.id) }}" class="btn btn-outline-primary btn-sm" title="View details">
+                                        <i class="bi bi-eye-fill"></i> View
+                                    </a>
+                                    <!-- Edit Record Link -->
+                                    <a href="{{ url_for('edit_student', id=student.id) }}" class="btn btn-outline-warning btn-sm" title="Edit record">
+                                        <i class="bi bi-pencil-fill"></i> Edit
+                                    </a>
+                                    <!-- Delete Record Link -->
+                                    <a href="{{ url_for('delete_student', id=student.id) }}" class="btn btn-outline-danger btn-sm" title="Delete record">
+                                        <i class="bi bi-trash-fill"></i> Delete
+                                    </a>
+                                </div>
+                            </td>
+                        </tr>
+                    {% endfor %}
+                {% else %}
+                    <!-- Empty State (No records found) -->
+                    <tr>
+                        <td colspan="7" class="text-center py-5">
+                            <div class="text-muted mb-3">
+                                <i class="bi bi-folder-x display-4 text-secondary"></i>
+                            </div>
+                            <h5 class="fw-bold text-secondary">No Student Records Found</h5>
+                            <p class="text-muted mb-0">Try searching with other keywords or register a new student.</p>
+                            <a href="{{ url_for('add_student') }}" class="btn btn-primary mt-3 btn-sm">
+                                <i class="bi bi-plus-lg me-1"></i>Add Student Now
+                            </a>
+                        </td>
+                    </tr>
+                {% endif %}
+            </tbody>
+        </table>
+    </div>
+</div>
+{% endblock %}

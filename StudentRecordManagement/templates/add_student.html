@@ -1,0 +1,146 @@
+{% extends "base.html" %}
+
+{% block title %}Add New Student - Student Record Management System{% endblock %}
+
+{% block content %}
+<div class="row justify-content-center">
+    <div class="col-lg-8 col-md-10">
+        <!-- Back Button -->
+        <div class="mb-3">
+            <a href="{{ url_for('students_list') }}" class="text-decoration-none text-primary fw-semibold">
+                <i class="bi bi-arrow-left me-1"></i> Back to Student Directory
+            </a>
+        </div>
+        
+        <!-- Registration Form Card -->
+        <div class="card border-0 shadow-sm rounded-3">
+            <div class="card-header bg-primary text-white py-3 border-0">
+                <h4 class="fw-bold mb-0"><i class="bi bi-person-plus-fill me-2"></i>Add New Student Record</h4>
+                <p class="mb-0 text-white-50 small">Fill in the required information to register the student in the database.</p>
+            </div>
+            
+            <div class="card-body p-4 bg-white">
+                <form action="{{ url_for('add_student') }}" method="POST" class="needs-validation" novalidate>
+                    
+                    <div class="row g-3">
+                        <!-- 1. Full Name -->
+                        <div class="col-md-6 col-12">
+                            <label for="name" class="form-label fw-semibold text-secondary">Full Name <span class="text-danger">*</span></label>
+                            <div class="input-group">
+                                <span class="input-group-text bg-light"><i class="bi bi-person-fill text-muted"></i></span>
+                                <input type="text" class="form-control bg-light" id="name" name="name" placeholder="John Doe" required>
+                            </div>
+                        </div>
+
+                        <!-- 2. Roll Number -->
+                        <div class="col-md-6 col-12">
+                            <label for="roll_number" class="form-label fw-semibold text-secondary">Roll Number <span class="text-danger">*</span></label>
+                            <div class="input-group">
+                                <span class="input-group-text bg-light"><i class="bi bi-hash text-muted"></i></span>
+                                <input type="text" class="form-control bg-light" id="roll_number" name="roll_number" placeholder="CS202601" required>
+                            </div>
+                        </div>
+
+                        <!-- 3. Department -->
+                        <div class="col-md-6 col-12">
+                            <label for="department" class="form-label fw-semibold text-secondary">Department <span class="text-danger">*</span></label>
+                            <div class="input-group">
+                                <span class="input-group-text bg-light"><i class="bi bi-building text-muted"></i></span>
+                                <select class="form-select bg-light" id="department" name="department" required>
+                                    <option value="" disabled selected>Select Department</option>
+                                    <option value="Computer Science">Computer Science</option>
+                                    <option value="Electrical Engineering">Electrical Engineering</option>
+                                    <option value="Mechanical Engineering">Mechanical Engineering</option>
+                                    <option value="Civil Engineering">Civil Engineering</option>
+                                    <option value="Information Technology">Information Technology</option>
+                                    <option value="Business Administration">Business Administration</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <!-- 4. Academic Year -->
+                        <div class="col-md-6 col-12">
+                            <label for="year" class="form-label fw-semibold text-secondary">Academic Year <span class="text-danger">*</span></label>
+                            <div class="input-group">
+                                <span class="input-group-text bg-light"><i class="bi bi-calendar-event text-muted"></i></span>
+                                <select class="form-select bg-light" id="year" name="year" required>
+                                    <option value="" disabled selected>Select Year</option>
+                                    <option value="1">1st Year (Freshman)</option>
+                                    <option value="2">2nd Year (Sophomore)</option>
+                                    <option value="3">3rd Year (Junior)</option>
+                                    <option value="4">4th Year (Senior)</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <!-- 5. Email Address -->
+                        <div class="col-md-6 col-12">
+                            <label for="email" class="form-label fw-semibold text-secondary">Email Address <span class="text-danger">*</span></label>
+                            <div class="input-group">
+                                <span class="input-group-text bg-light"><i class="bi bi-envelope-fill text-muted"></i></span>
+                                <input type="email" class="form-control bg-light" id="email" name="email" placeholder="student@college.edu" required>
+                            </div>
+                        </div>
+
+                        <!-- 6. Phone Number -->
+                        <div class="col-md-6 col-12">
+                            <label for="phone" class="form-label fw-semibold text-secondary">Phone Number <span class="text-danger">*</span></label>
+                            <div class="input-group">
+                                <span class="input-group-text bg-light"><i class="bi bi-telephone-fill text-muted"></i></span>
+                                <input type="text" class="form-control bg-light" id="phone" name="phone" placeholder="9876543210" required>
+                            </div>
+                        </div>
+
+                        <!-- 7. CGPA (0.00 to 10.00) -->
+                        <div class="col-md-12 col-12">
+                            <label for="cgpa" class="form-label fw-semibold text-secondary">CGPA (Scale: 0.0 - 10.0) <span class="text-danger">*</span></label>
+                            <div class="input-group">
+                                <span class="input-group-text bg-light"><i class="bi bi-percent text-muted"></i></span>
+                                <input type="number" class="form-control bg-light" id="cgpa" name="cgpa" placeholder="8.5" min="0.0" max="10.0" step="0.01" required>
+                            </div>
+                        </div>
+
+                        <!-- 8. Residential Address -->
+                        <div class="col-12">
+                            <label for="address" class="form-label fw-semibold text-secondary">Address <span class="text-danger">*</span></label>
+                            <div class="input-group">
+                                <span class="input-group-text bg-light"><i class="bi bi-geo-alt-fill text-muted"></i></span>
+                                <textarea class="form-control bg-light" id="address" name="address" rows="3" placeholder="Enter student's permanent address..." required></textarea>
+                            </div>
+                        </div>
+                    </div>
+
+                    <hr class="my-4">
+
+                    <!-- Actions Buttons -->
+                    <div class="d-flex justify-content-end gap-2">
+                        <a href="{{ url_for('students_list') }}" class="btn btn-outline-secondary px-4">Cancel</a>
+                        <button type="submit" class="btn btn-primary px-4 shadow-sm">
+                            <i class="bi bi-check-circle-fill me-1"></i>Save Record
+                        </button>
+                    </div>
+
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+// Simple Bootstrap 5 front-end form validation script
+(function () {
+  'use strict'
+  var forms = document.querySelectorAll('.needs-validation')
+  Array.prototype.slice.call(forms)
+    .forEach(function (form) {
+      form.addEventListener('submit', function (event) {
+        if (!form.checkValidity()) {
+          event.preventDefault()
+          event.stopPropagation()
+        }
+        form.classList.add('was-validated')
+      }, false)
+    })
+})()
+</script>
+{% endblock %}

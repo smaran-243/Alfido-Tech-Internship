@@ -1,0 +1,42 @@
+{% extends "base.html" %}
+
+{% block title %}Delete Confirmation - {{ student.name }}{% endblock %}
+
+{% block content %}
+<div class="row justify-content-center">
+    <div class="col-md-6 col-12">
+        <!-- Warning Card -->
+        <div class="card border-0 shadow-sm rounded-3 overflow-hidden">
+            <div class="bg-danger text-white p-4 text-center">
+                <i class="bi bi-exclamation-triangle-fill display-3 mb-2"></i>
+                <h4 class="fw-bold mb-0">Confirm Delete Operation</h4>
+            </div>
+            
+            <div class="card-body p-4 text-center bg-white">
+                <p class="lead mb-4 text-dark">
+                    Are you sure you want to permanently delete the student record for <strong>{{ student.name }}</strong> (Roll No: {{ student.roll_number }})?
+                </p>
+                
+                <div class="alert alert-warning border-0 small text-start mb-4 shadow-sm">
+                    <i class="bi bi-info-circle-fill me-2 text-warning"></i>
+                    <strong>Warning:</strong> This action is irreversible. The student's grades, contact information, and address will be completely wiped from the database.
+                </div>
+                
+                <!-- Action Form (POST method to secure deletion) -->
+                <form action="{{ url_for('delete_student', id=student.id) }}" method="POST" class="d-inline">
+                    <div class="d-flex justify-content-center gap-2">
+                        <!-- Cancel button redirects back to details -->
+                        <a href="{{ url_for('student_details', id=student.id) }}" class="btn btn-outline-secondary px-4">
+                            Cancel
+                        </a>
+                        <!-- Confirm button fires the POST request -->
+                        <button type="submit" class="btn btn-danger px-4 shadow-sm fw-bold">
+                            <i class="bi bi-trash-fill me-1"></i>Delete Permanently
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

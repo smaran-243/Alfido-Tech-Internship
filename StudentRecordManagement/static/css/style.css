@@ -1,0 +1,123 @@
+/* 
+  Custom Stylesheet for Student Record Management System
+  Theme: Professional Blue and White
+*/
+
+/* 1. Global Reset & Base Styles */
+body {
+    font-family: 'Poppins', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    background-color: #f8f9fa; /* Off-white background */
+    color: #333333;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+/* 2. Color Variable Helpers */
+:root {
+    --primary-blue: #0d6efd;
+    --light-blue-bg: #e6f0ff;
+    --dark-blue-text: #0a4da2;
+    --soft-gray-border: #dee2e6;
+}
+
+/* 3. Typography Adjustments */
+h1, h2, h3, h4, h5, h6 {
+    font-weight: 600;
+    color: #2c3e50;
+}
+
+/* 4. Navbar Custom Styles */
+.navbar-brand {
+    font-size: 1.4rem;
+    letter-spacing: 0.5px;
+}
+
+.nav-link {
+    transition: color 0.25s ease-in-out;
+}
+
+.nav-link:hover {
+    color: #ffffff !important;
+}
+
+/* 5. Custom Button Enhancements */
+.btn {
+    border-radius: 6px;
+    font-weight: 500;
+    transition: all 0.25s ease;
+}
+
+.btn-primary {
+    background-color: var(--primary-blue);
+    border-color: var(--primary-blue);
+}
+
+.btn-primary:hover {
+    background-color: #0b5ed7;
+    border-color: #0a58ca;
+    transform: translateY(-1px);
+    box-shadow: 0 4px 6px rgba(13, 110, 253, 0.15);
+}
+
+.btn-outline-primary:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 4px 6px rgba(13, 110, 253, 0.15);
+}
+
+/* 6. Card Enhancements */
+.card {
+    border-radius: 12px;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+/* Feature card hover micro-animation */
+.bg-light-blue-hover:hover {
+    background-color: var(--light-blue-bg) !important;
+    transform: translateY(-5px);
+    box-shadow: 0 8px 16px rgba(13, 110, 253, 0.1) !important;
+}
+
+/* 7. Table Styling Customizations */
+.table {
+    border-radius: 8px;
+    overflow: hidden;
+}
+
+.table-primary {
+    background-color: var(--light-blue-bg) !important;
+    color: var(--dark-blue-text) !important;
+}
+
+.table-hover tbody tr:hover {
+    background-color: #f1f7ff;
+}
+
+.table-striped>tbody>tr:nth-of-type(odd)>* {
+    --bs-table-color-type: #333333;
+    --bs-table-bg-type: rgba(13, 110, 253, 0.02);
+}
+
+/* Custom badge for departments */
+.bg-blue-subtle {
+    background-color: var(--light-blue-bg) !important;
+    color: var(--dark-blue-text) !important;
+}
+
+/* 8. Form Inputs Focus Customizations */
+.form-control:focus, .form-select:focus {
+    border-color: #86b7fe;
+    box-shadow: 0 0 0 0.25rem rgba(13, 110, 253, 0.15);
+    background-color: #ffffff !important;
+}
+
+/* 9. Transition utilities */
+.transition {
+    transition: all 0.3s ease-in-out;
+}
+
+/* 10. Custom alerts formatting */
+.alert {
+    border-radius: 8px;
+    border: none;
+}
